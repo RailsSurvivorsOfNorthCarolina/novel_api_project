@@ -1,0 +1,38 @@
+[
+    {
+        "title": "The Witcher 2: Assassins of Kings",
+        "score": "9",
+        "publisher": "Atari",
+        "short_description": "May 17, 2011 - ...about the Witcher, Geralt of Rivia, features a thoroughly engrossing, mature storyline defining new standards for thought-provoking, non-linear game narration...",
+        "platforms": {
+            "1": "PC"
+        },
+        "thumb": "http://xbox360media.ign.com/xbox360/image/object/143/14345201/witcher_final_2boxart_160w.jpg"
+    },
+    {
+        "title": "The Witcher 3: Wild Hunt",
+        "score": "9.3",
+        "publisher": "CD Projekt",
+        "short_description": "May 19, 2015 - ...series, The Witcher 3: Wild Hunt is a unique combination of a non-linear story and an open world - a character-driven, non-linear story experience focused on...",
+        "platforms": {
+            "1": "Xbox One",
+            "2": "PC",
+            "3": "PS4"
+        },
+        "thumb": "http://assets1.ignimgs.com/2015/05/18/thewitcher3xboxone1jpg-7c5503_160w.jpg"
+    },
+    {
+        "title": "The Witcher",
+        "score": "8.5",
+        "publisher": "Atari",
+        "short_description": "October 30, 2007 - Sapkowski, The Witcher combines spectacular action and an intriguing storyline. You are a Witcher, a warrior who has been trained to fight since childhood, subjected...",
+        "platforms": {
+            "1": "PC",
+            "2": "Mac",
+            "3": "PS3",
+            "4": "Xbox 360",
+            "5": "Cell"
+        },
+        "thumb": "http://xbox360media.ign.com/xbox360/image/object/682/682220/thewitcherpcboxart_160w.jpg"
+    }
+]
