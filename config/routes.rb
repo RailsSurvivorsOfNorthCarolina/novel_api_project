@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
   get 'game_reviews/show'
+  get 'game_reviews/danai'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
