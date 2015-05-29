@@ -9,14 +9,19 @@ end
 
 
 class GameReviewTest < ActiveSupport::TestCase
-  def test_get_review_score
-    game = GameReview.new("The Witcher 2")
-    assert_equal 9, game.review_score
-  end
+  # def test_get_review_score
+  #   game = GameReview.new("The Witcher 2")
+  #   assert_equal 9, game.review_score
+  # end
+  #
+  # test "can find game searched by user" do
+  #   game = GameReview.new("The Witcher 2")
+  #   assert_equal true, game.find_game_we_search_for.scan(/The Witcher 2/)
+  # end
 
-  test "can find game searched by user" do
+  def test_convert_game_date_into_weather_date
     game = GameReview.new("The Witcher 2")
-    assert_equal true, game.find_game_we_search_for.scan(/The Witcher 2/)
+    assert_equal "20110517", game.date_converter
   end
 
   # test "can get title from game" do
