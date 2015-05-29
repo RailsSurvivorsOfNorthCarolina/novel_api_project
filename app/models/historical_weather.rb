@@ -1,11 +1,11 @@
 class HistoricalWeather
-  def initialize
+  def initialize(date)
     @weather_data = get_data
     @date = date
   end
 
   def temperature
-
+    @weather_data["history"]["observations"][0]["tempi"]
   end
 
   def get_data

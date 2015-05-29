@@ -1,9 +1,9 @@
 require 'test_helper'
-
+require 'game_review'
 
 class GameReview
   def get_data
-    JSON.parse(File.open('./game_reviews.json').read)
+    JSON.parse(File.open("#{Rails.root}/test/models/game_review.json").read)
   end
 end
 
