@@ -24,9 +24,9 @@ class HistoricalWeather
     @date.each do |d|
       if d == ""
         weather_hash = {}
-        weather_hash["temperature"] = "72.1"
-        weather_hash["rain"] = "0.0"
-        weather_hash["conditions"] = "cloudy"
+        weather_hash["temperature"] = "no info"
+        weather_hash["rain"] = "no info"
+        weather_hash["conditions"] = "no info"
         weather_array << weather_hash
       else
         weather_hash = {}
