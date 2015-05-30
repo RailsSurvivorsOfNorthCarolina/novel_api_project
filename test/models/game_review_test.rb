@@ -12,7 +12,7 @@ class GameReviewTest < ActiveSupport::TestCase
 
   def test_get_review_score
     game = GameReview.new("The Witcher 2")
-    assert_equal "9", game.review_score
+    assert_equal "9", game.review_score[0]
   end
 
 
@@ -27,8 +27,13 @@ class GameReviewTest < ActiveSupport::TestCase
   end
 
   test "can find game searched by user" do
-  game = GameReview.new("The Witcher 2")
-  assert_equal "The Witcher 2", game.find_game.scan(/The Witcher 2/).join
+    game = GameReview.new("The Witcher 2")
+    assert_equal "The Witcher 2", game.find_game.scan(/The Witcher 2/).join
+  end
+
+  test "get game review date" do
+    game = GameReview.new("The Witcher 2")
+    assert_equal [["May 17, 2011"], ["May 19, 2015"], ["October 30, 2007"]], game.review_date
   end
 
 end

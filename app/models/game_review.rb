@@ -12,37 +12,50 @@ class GameReview
   end
 
   def find_game
-    our_game_array=[]
-    @page.select do |g|
-      if g["title"].include?@game
-        our_game_array << g
-      end
-    end
-    p our_game_array.join
+    # our_game_array=[]
+    # @page.select do |g|
+    #   if g["title"].include?@game
+    #     our_game_array << g
+    #   end
+    # end
+    # our_game_array.join
+    game_array = @page.map {|g| g}
+    game_array.join
   end
 
   def review_score
-    our_game_score=""
-    @page.select do |g|
-      if g["title"].include?@game
-        our_game_score << g["score"]
-      end
-    end
-    p our_game_score
+    @page.map {|g| g["score"]}
   end
 
   def get_title
-    our_game_title=""
+    game_title=""
     @page.select do |g|
       if g["title"].include?@game
-        our_game_title << g["title"]
+        game_title << g["title"]
       end
     end
-    p our_game_title
+    game_title
+  end
+
+  def game_hash
+    array = []
+    @page.each do |g|
+      hash = {}
+      hash[:title] = g["title"]
+      hash[:score] = g["score"]
+      hash[:date] = g["short_description"].scan(/\A[A-Z]\w+\s\d{2}\,\s\d{4}/).join
+      array << hash
+    end
+    array
   end
 
   def review_date
-    @page["short_description"].match(/\A[A-Z]\w+\s\d{2}\,\s\d{4}/)
+    array = []
+    @page.map do |g|
+      date = g["short_description"].scan(/\A[A-Z]\w+\s\d{2}\,\s\d{4}/)
+      array << date
+    end
+    array
   end
 
 
@@ -74,8 +87,8 @@ class GameReview
     #  game_year.to_s
 
   end
-  
+
   def get_data
-    HTTParty.get("https://videogamesrating.p.mashape.com/get.php?count=5&game=#{@game}", headers: {"X-Mashape-Key" => "#{ENV["IGN_KEY"]}","Accept" => "application/json"})
+    HTTParty.get("https://videogamesrating.p.mashape.com/get.php?count=10&game=#{@game}", headers: {"X-Mashape-Key" => "#{ENV["IGN_KEY"]}","Accept" => "application/json"})
   end
 end
