@@ -38,7 +38,7 @@ class GameReview < HistoricalWeather
     end
     array
 
-    HistoricalWeather.new(20110909)
+    # HistoricalWeather.new(date).weather_info
   end
 
 
@@ -59,7 +59,6 @@ class GameReview < HistoricalWeather
     }
     date_array = []
     @page.each do |g|
-      date_hash = {}
       game_string = g["short_description"]
 
       game_date = game_string.match(/[A-Z]\w+\s\d{2}\,\s\d{4}/)
@@ -76,8 +75,7 @@ class GameReview < HistoricalWeather
       game_month = game_month.to_s
       game_month = month_hash[game_month]
 
-      date_hash["date"] = "#{game_year}#{game_month}#{game_day}"
-      date_array << date_hash
+      date_array << "#{game_year}#{game_month}#{game_day}"
     end
     date_array
   end
