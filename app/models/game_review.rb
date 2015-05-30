@@ -2,7 +2,8 @@ class GameReview < HistoricalWeather
   def initialize(game)
     @game = game
     @page = get_data
-  end  
+  end
+
 
   def array_count
     @page.count
@@ -37,6 +38,8 @@ class GameReview < HistoricalWeather
       array << hash
     end
     array
+
+    # HistoricalWeather.new(date).weather_info
   end
 
 
@@ -49,31 +52,61 @@ class GameReview < HistoricalWeather
     array
   end
 
-
   def date_converter
     month_hash = {
       "January" => "01", "February" => "02", "March" => "03", "April" => "04",
       "May" => "05", "June" => "06", "July" => "07", "August" => "08",
       "September" => "09", "October" => "10", "Noverber" => "11", "December" => "12"
     }
-    game_string = @game[0]["review_release_date"]
+    date_array = []
+    @page.each do |g|
+      game_string = g["short_description"]
 
-    game_date = game_string.match(/[A-Z]\w+\s\d{2}\,\s\d{4}/)
-    game_date = game_date.to_s
+      game_date = game_string.match(/[A-Z]\w+\s\d{2}\,\s\d{4}/)
+      game_date = game_date.to_s
 
-    game_year = game_date.match(/\d{4}/)
-    game_year = game_year.to_s
+      game_year = game_date.match(/\d{4}/)
+      game_year = game_year.to_s
 
-    game_day = game_date.match(/\d{2},/)
-    game_day = game_day.to_s
-    game_day = game_day.gsub(",","")
+      game_day = game_date.match(/\d{2},/)
+      game_day = game_day.to_s
+      game_day = game_day.gsub(",","")
 
-    game_month = game_date.match(/\A\w{0,100}/)
-    game_month = game_month.to_s
-    game_month = month_hash[game_month]
+      game_month = game_date.match(/\A\w{0,100}/)
+      game_month = game_month.to_s
+      game_month = month_hash[game_month]
 
-     game_year+game_month+game_day
+      date_array << "#{game_year}#{game_month}#{game_day}"
+    end
+    date_array
   end
+
+  # def date_converter
+  #   month_hash = {
+  #     "January" => "01", "February" => "02", "March" => "03", "April" => "04",
+  #     "May" => "05", "June" => "06", "July" => "07", "August" => "08",
+  #     "September" => "09", "October" => "10", "Noverber" => "11", "December" => "12"
+  #   }
+  #
+  #   game_string = @page[0]["short_description"]
+  #
+  #
+  #   game_date = game_string.match(/[A-Z]\w+\s\d{2}\,\s\d{4}/)
+  #   game_date = game_date.to_s
+  #
+  #   game_year = game_date.match(/\d{4}/)
+  #   game_year = game_year.to_s
+  #
+  #   game_day = game_date.match(/\d{2},/)
+  #   game_day = game_day.to_s
+  #   game_day = game_day.gsub(",","")
+  #
+  #   game_month = game_date.match(/\A\w{0,100}/)
+  #   game_month = game_month.to_s
+  #   game_month = month_hash[game_month]
+  #
+  #    game_year+game_month+game_day
+  # end
 
   def get_data
     HTTParty.get("https://videogamesrating.p.mashape.com/get.php?count=10&game=#{@game}", headers: {"X-Mashape-Key" => "#{ENV["IGN_KEY"]}","Accept" => "application/json"})
