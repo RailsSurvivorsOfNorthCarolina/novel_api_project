@@ -55,7 +55,7 @@ class GameReview
       "May" => "05", "June" => "06", "July" => "07", "August" => "08",
       "September" => "09", "October" => "10", "Noverber" => "11", "December" => "12"
     }
-    month_hash[:January]
+    
       game_string = @page[0]["short_description"]
 
       game_date = game_string.match(/[A-Z]\w+\s\d{2}\,\s\d{4}/)
