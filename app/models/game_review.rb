@@ -2,9 +2,6 @@ class GameReview < HistoricalWeather
   def initialize(game)
     @game = game
     @page = get_data
-    # @our_game_array = []
-    #HTTParty.get("https://videogamesrating.p.mashape.com/get.php?count=5&game=#{game}",
-                          # headers: {"X-Mashape-Key" => "#{ENV['IGN_KEY']}","Accept" => "application/json"})
   end
 
   def array_count
@@ -40,6 +37,8 @@ class GameReview < HistoricalWeather
       array << hash
     end
     array
+
+    HistoricalWeather.new(20110909)
   end
 
 
@@ -59,7 +58,9 @@ class GameReview < HistoricalWeather
       "May" => "05", "June" => "06", "July" => "07", "August" => "08",
       "September" => "09", "October" => "10", "Noverber" => "11", "December" => "12"
     }
-    game_string = @game[0]["review_release_date"]
+
+    game_string = @page[0]["short_description"]
+
 
     game_date = game_string.match(/[A-Z]\w+\s\d{2}\,\s\d{4}/)
     game_date = game_date.to_s

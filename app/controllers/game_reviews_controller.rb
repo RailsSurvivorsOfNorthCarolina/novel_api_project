@@ -4,7 +4,7 @@ class GameReviewsController < ApplicationController
     # weather_date = game.date_converter
     # weather_details = HistoricalWeather.new(params[:weather_date])
     # render json: game + weather_details
-    render json: GameReview.new(params[:game]).game_info
+    render json: GameReview.new(params[:game]).date_converter
   end
 
   def weather_show
