@@ -1,7 +1,10 @@
+
 class GameReview
+  attr_accessor :final_array
   def initialize(game)
     @game = game
     @page = get_data
+    @final_array = []
     # @our_game_array = []
     #HTTParty.get("https://videogamesrating.p.mashape.com/get.php?count=5&game=#{game}",
                           # headers: {"X-Mashape-Key" => "#{ENV['IGN_KEY']}","Accept" => "application/json"})
@@ -37,16 +40,28 @@ class GameReview
     game_title
   end
 
+
+
+
   def game_hash
-    array = []
+
+#---------------------------------------
+    # array = []
+
     @page.each do |g|
       hash = {}
       hash[:title] = g["title"]
       hash[:score] = g["score"]
-      hash[:date] = g["short_description"].scan(/\A[A-Z]\w+\s\d{2}\,\s\d{4}/).join
-      array << hash
+      hash[:review_release_date] = g["short_description"].scan(/\A[A-Z]\w+\s\d{2}\,\s\d{4}/).join
+      #array << hash
+      @final_array << hash
+      GameReview.new(@final_array).date_converter
     end
-    array
+    @final_array
+    # GameReview.new("deeznuts").date_converter
+    # HistoricalWeather.new(new_date)
+
+
   end
 
   def review_date
@@ -65,8 +80,8 @@ class GameReview
       "May" => "05", "June" => "06", "July" => "07", "August" => "08",
       "September" => "09", "October" => "10", "Noverber" => "11", "December" => "12"
     }
-    
-      game_string = @page[0]["short_description"]
+
+      game_string =  [1][:review_release_date]
 
       game_date = game_string.match(/[A-Z]\w+\s\d{2}\,\s\d{4}/)
       game_date = game_date.to_s
@@ -82,7 +97,7 @@ class GameReview
       game_month = game_month.to_s
       game_month = month_hash[game_month]
 
-      weather_date_converted = game_year+game_month+game_day
+       game_year+game_month+game_day
 
     #  game_year.to_s
 

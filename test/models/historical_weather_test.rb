@@ -26,5 +26,4 @@ class HistoricalWeatherTest < ActiveSupport::TestCase
     weather_date = HistoricalWeather.new(20060405)
     assert_equal "Mostly Cloudy", weather_date.climate_conditions
   end
-
 end
