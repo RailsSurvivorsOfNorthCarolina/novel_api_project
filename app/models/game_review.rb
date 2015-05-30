@@ -59,7 +59,7 @@ class GameReview < HistoricalWeather
       "May" => "05", "June" => "06", "July" => "07", "August" => "08",
       "September" => "09", "October" => "10", "Noverber" => "11", "December" => "12"
     }
-    game_string = GameReview.new(@game)[0]["review_release_date"]
+    game_string = @game[0]["review_release_date"]
 
     game_date = game_string.match(/[A-Z]\w+\s\d{2}\,\s\d{4}/)
     game_date = game_date.to_s
