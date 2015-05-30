@@ -1,4 +1,4 @@
-class GameReview
+class GameReview < HistoricalWeather
   def initialize(game)
     @game = game
     @page = get_data
@@ -12,13 +12,6 @@ class GameReview
   end
 
   def find_game
-    # our_game_array=[]
-    # @page.select do |g|
-    #   if g["title"].include?@game
-    #     our_game_array << g
-    #   end
-    # end
-    # our_game_array.join
     game_array = @page.map {|g| g}
     game_array.join
   end
@@ -37,23 +30,24 @@ class GameReview
     game_title
   end
 
-  def game_hash
+  def game_info
     array = []
     @page.each do |g|
       hash = {}
-      hash[:title] = g["title"]
-      hash[:score] = g["score"]
-      hash[:date] = g["short_description"].scan(/\A[A-Z]\w+\s\d{2}\,\s\d{4}/).join
+      hash["title"] = g["title"]
+      hash["score"] = g["score"]
+      hash["review_release_date"] = g["short_description"].scan(/\A[A-Z]\w+\s\d{2}\,\s\d{4}/).join
       array << hash
     end
     array
   end
 
+
   def review_date
     array = []
     @page.map do |g|
-      date = g["short_description"].scan(/\A[A-Z]\w+\s\d{2}\,\s\d{4}/)
-      array << date
+      review_release = g["short_description"].scan(/\A[A-Z]\w+\s\d{2}\,\s\d{4}/)
+      array << review_release
     end
     array
   end
@@ -65,27 +59,23 @@ class GameReview
       "May" => "05", "June" => "06", "July" => "07", "August" => "08",
       "September" => "09", "October" => "10", "Noverber" => "11", "December" => "12"
     }
-    month_hash[:January]
-      game_string = @page[0]["short_description"]
+    game_string = GameReview.new(@game)[0]["review_release_date"]
 
-      game_date = game_string.match(/[A-Z]\w+\s\d{2}\,\s\d{4}/)
-      game_date = game_date.to_s
+    game_date = game_string.match(/[A-Z]\w+\s\d{2}\,\s\d{4}/)
+    game_date = game_date.to_s
 
-      game_year = game_date.match(/\d{4}/)
-      game_year = game_year.to_s
+    game_year = game_date.match(/\d{4}/)
+    game_year = game_year.to_s
 
-      game_day = game_date.match(/\d{2},/)
-      game_day = game_day.to_s
-      game_day = game_day.gsub(",","")
+    game_day = game_date.match(/\d{2},/)
+    game_day = game_day.to_s
+    game_day = game_day.gsub(",","")
 
-      game_month = game_date.match(/\A\w{0,100}/)
-      game_month = game_month.to_s
-      game_month = month_hash[game_month]
+    game_month = game_date.match(/\A\w{0,100}/)
+    game_month = game_month.to_s
+    game_month = month_hash[game_month]
 
-      weather_date_converted = game_year+game_month+game_day
-
-    #  game_year.to_s
-
+     game_year+game_month+game_day
   end
 
   def get_data
