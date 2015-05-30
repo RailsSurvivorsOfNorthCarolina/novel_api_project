@@ -44,9 +44,7 @@ class GameReview
 
 
   def game_hash
-
-#---------------------------------------
-    # array = []
+  # array = []
 
     @page.each do |g|
       hash = {}
