@@ -7,7 +7,7 @@ class GameReviewsController < ApplicationController
     render json: GameReview.new(params[:game]).game_info
   end
 
-  def danai
+  def weather_show
     render json: HistoricalWeather.new(params[:date]).weather_info
   end
 end
