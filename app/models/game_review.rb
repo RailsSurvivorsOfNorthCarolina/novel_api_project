@@ -41,12 +41,7 @@ class GameReview < HistoricalWeather
 
 
   def review_date
-    array = []
-    @page.map do |g|
-      review_release = g["short_description"].scan(/\A[A-Z]\w+\s\d{2}\,\s\d{4}/)
-      array << review_release
-    end
-    array
+    @page.map {|g| (g["short_description"].scan(/\A[A-Z]\w+\s\d{2}\,\s\d{4}/))}
   end
 
   def date_converter
@@ -79,6 +74,6 @@ class GameReview < HistoricalWeather
   end
 
   def get_data
-    HTTParty.get("https://videogamesrating.p.mashape.com/get.php?count=10&game=#{@game}", headers: {"X-Mashape-Key" => "#{ENV["IGN_KEY"]}","Accept" => "application/json"})
+    HTTParty.get("https://videogamesrating.p.mashape.com/get.php?count=5&game=#{@game}", headers: {"X-Mashape-Key" => "#{ENV["IGN_KEY"]}","Accept" => "application/json"})
   end
 end

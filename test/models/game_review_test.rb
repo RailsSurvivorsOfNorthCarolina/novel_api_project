@@ -18,7 +18,7 @@ class GameReviewTest < ActiveSupport::TestCase
 
   def test_convert_game_date_into_weather_date
     game = GameReview.new("The Witcher 2")
-    assert_equal "20110517", game.date_converter
+    assert_equal ["20110517", "20150519", "20071030"], game.date_converter
   end
 
   test "can get title from game" do
