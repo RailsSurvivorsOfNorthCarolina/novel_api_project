@@ -4,6 +4,7 @@ class GameReview
     @page = get_data
   end
 
+
   def array_count
     @page.count
   end
