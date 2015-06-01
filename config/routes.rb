@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get 'api/v1/game_reviews' => 'game_reviews#show'
   get 'api/v1/game_reviews/:game' => 'game_reviews#show'
   get 'api/v1/game_reviews/weather_show'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -19,33 +19,32 @@ class HistoricalWeather
   end
 
   def weather_info
-    weather_array = []
     count = 0
-    @date.each do |d|
+    output = @date.map do |d|
       if d == ""
         weather_hash = {}
         weather_hash["temperature"] = "no info"
         weather_hash["rain"] = "no info"
         weather_hash["conditions"] = "no info"
-        weather_array << weather_hash
+        weather_hash
       else
         weather_hash = {}
         weather_hash["temperature"] = self.temperature(count)
         weather_hash["rain"] = self.rainfall(count)
         weather_hash["conditions"] = self.climate_conditions(count)
-        weather_array << weather_hash
+        weather_hash
       end
       count += 1
+      weather_hash
     end
-    weather_array
+    output
   end
 
 
   def get_data
-    data = []
-    @date.each do |date|
-      data << HTTParty.get("http://api.wunderground.com/api/#{ENV["WU_KEY"]}/history_#{date}/q/CA/San_Francisco.json")
+    output = @date.map do |date|
+      HTTParty.get("http://api.wunderground.com/api/#{ENV["WU_KEY"]}/history_#{date}/q/CA/San_Francisco.json")
     end
-    data
+    output
   end
 end

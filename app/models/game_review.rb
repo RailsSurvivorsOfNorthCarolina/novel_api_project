@@ -1,4 +1,4 @@
-class GameReview < HistoricalWeather
+class GameReview
   def initialize(game)
     @game = game
     @page = get_data
@@ -28,15 +28,14 @@ class GameReview < HistoricalWeather
   end
 
   def game_info
-    array = []
-    @page.each do |g|
+    output = @page.map do |game|
       hash = {}
-      hash["title"] = g["title"]
-      hash["score"] = g["score"]
-      hash["review_release_date"] = g["short_description"].scan(/\A[A-Z]\w+\s\d{2}\,\s\d{4}/).join
-      array << hash
+      hash["title"] = game["title"]
+      hash["score"] = game["score"]
+      hash["review_release_date"] = game["short_description"].scan(/\A[A-Z]\w+\s\d{2}\,\s\d{4}/).join
+      hash
     end
-    array
+    output
   end
 
 
@@ -50,8 +49,8 @@ class GameReview < HistoricalWeather
       "May" => "05", "June" => "06", "July" => "07", "August" => "08",
       "September" => "09", "October" => "10", "Noverber" => "11", "December" => "12"
     }
-    date_array = []
-    @page.each do |g|
+
+    output = @page.map do |g|
       game_string = g["short_description"]
 
       game_date = game_string.match(/[A-Z]\w+\s\d{2}\,\s\d{4}/)
@@ -68,9 +67,9 @@ class GameReview < HistoricalWeather
       game_month = game_month.to_s
       game_month = month_hash[game_month]
 
-      date_array << "#{game_year}#{game_month}#{game_day}"
+      "#{game_year}#{game_month}#{game_day}"
     end
-    date_array
+    output
   end
 
   def get_data
